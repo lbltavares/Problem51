@@ -58,14 +58,7 @@ string to_binary(int n)
 
 int main()
 {
-    vector<int> vec;
-    vec.push_back(3);
-    vec.push_back(5);
-    vec.push_back(15);
-    vec.push_back(41);
-    cout << vec << endl;
-
-    return 0;
+    int maior = 0;
     for (int i = 0; i < INT_MAX; i++)
     {
         string num = to_string(i);
@@ -81,23 +74,22 @@ int main()
             {
                 string num_to_test = num;
                 for (int d = 0; d < size; d++)
-                    if (bin[d] == '1' && !(d == 0 && k == 0))
+                {
+                    if (d == 0 && k == 0)
+                        break;
+                    if (bin[d] == '1')
                         num_to_test[d] = k + '0';
+                }
                 if (num_to_test == num)
                     continue;
                 int x = atoi(num_to_test.c_str());
                 if (is_prime(x))
-                {
                     primes.push_back(x);
-                }
             }
-            if (primes.size() == 8)
+            if (primes.size() > maior)
             {
-                cout << num << " - ";
-                for (int &i : primes)
-                    cout << i << ", ";
-                cout << endl;
-                cin.get();
+                maior = primes.size();
+                cout << "num: " << num << "\tcomb: " << bin << "\t" << primes << endl;
             }
         }
     }
